@@ -1,0 +1,32 @@
+* Categorias para los negocios
+CREATE TABLE user_category (
+id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+status INT(11) NOT NULL DEFAULT 0,
+created_at_ TIMESTAMP DEFAULT current_timestamp(),
+updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00'
+);
+
+* Tuvo que añadirse un 'category_id' a los negocios para poder clasificarlos
+ALTER TABLE users ADD COLUMN category_id INT(11) DEFAULT 0;
+
+* Tuvo que anadirse una columna 'available_days' para guardar el registro de checkbox de los negocios
+ALTER TABLE users ADD COLUMN available_days VARCHAR(11);
+
+* Tuvo que volverse unique code porque es usado como id para 'cart_coupen' y puede generar problemas
+ALTER TABLE offer ADD UNIQUE (code);
+
+* Tuvo que añadirse la columna 'offer_id' para que cada orden guarde el id de la oferta que se le esta aplicando
+ALTER TABLE orders ADD COLUMN offer_id INT(11);
+
+* Registro de categorias para produccion
+INSERT INTO `user_category` (`id`, `name`) VALUES
+(1,'Palomitas Gourmet'), (2,'Fast food'), (3,'Vegetales'), (4,'Vegana'), (5,'Comida Mexicana '), (6,'Pastas'), (7,'Carnicería'), (8,'Bebidas'), (9,'Pastelería'),
+(10,'Panadería'), (11,'Antojitos Mexicanos'), (12,'Taquería'), (13,'Repostería'), (14,'Paletas de Hielo'), (15,'Restaurante, Verdulería'), (16,'Papelería'),
+(17,'Comida Japonesa'), (18,'Snacks'), (19,'Pizza'), (20,'Dulcería'), (21,'Marisquería'), (22,'Fuente de Sodas'), (23,'Cremeria'), (24,'Restaurante-Bar'),
+(25,'Rosticeria'), (26,'Donas'), (27,'Hamburgueseria'), (28,'Fabrica de Hamburguesas'), (29,'Esquites'), (30,'Torteria'), (31,'Crepas'), (32,'Farmacias'),
+(33,'Artesanales'), (34,'Cafe Restaurante'), (35,'Abarrotes'), (36,'Paleteria y Heladeria'), (37,'Pañales'), (38,'Productos para el Hogar'), (39,'Cuidado Personal'),
+(40,'Chilaqueria'), (41,'Jugos Nutritivos'), (42,'Alimentos y Bebidas'), (43,'Cafeteria y Antojitos'), (44,'Productos de Limpieza'), (45,'Chilaquería'),
+(46,'Pescados y Mariscos'), (47,'Huaraches'), (48,'Cocina Mexicana'), (49,'Chicharrones Preparados'), (50,'Tamaleria'), (51,'Barbacoa, Carnitas'),
+(52,'Restaurante Mexicano'), (53,'Burritos'), (54,'Alimentos y Accesorios para Ma'), (55,'Palomitas Gourmet'), (56,'Nosotros lo hacemos por ti'),
+(57,'Asadero'), (58,'Costillas'), (59,'Bar'), (60,'Alitas'), (61,'Comida Italiana'), (62,'Bebidas y Postres'), (63,'Snacks & Comida Mexicana'), (64,'Paletas de Hielo');
