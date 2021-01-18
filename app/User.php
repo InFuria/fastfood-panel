@@ -385,26 +385,27 @@ class User extends Authenticatable
                 }
 
                 $lid     =  isset($_GET['lid']) && $_GET['lid'] > 0 ? $_GET['lid'] : 0;
+                $cate_name = Category::find($i->category_id);
 
                 $item[] = [
 
-                'id'            => $i->id,
-                //'name'          => $this->getLangItem($i->id,$_GET['lid'])['name'],
-                'name'          => $this->getLangItem($i->id,$lid)['name'],
-                'img'           => $i->img ? Asset('upload/item/'.$i->img) : null,
-                //'description'   => $this->getLangItem($i->id,$_GET['lid'])['desc'],
-                'description'   => $this->getLangItem($i->id,$lid)['desc'],
-                's_price'       => $i->small_price,
-                'm_price'       => $i->medium_price,
-                'l_price'       => $i->large_price,
-                'price'         => $price,
-                'count'         => count($count),
-                'nonveg'        => $i->nonveg,
-                'addon'         => $this->addon($i->id),
-                'status'        => $i->status,
-                'showOptions'   => $showOptions,
-                'cate_id'       => $i->category_id,
-                'cate_name'     => Category::find($i->category_id)->name,
+                    'id'            => $i->id,
+                    //'name'          => $this->getLangItem($i->id,$_GET['lid'])['name'],
+                    'name'          => $this->getLangItem($i->id,$lid)['name'],
+                    'img'           => $i->img ? Asset('upload/item/'.$i->img) : null,
+                    //'description'   => $this->getLangItem($i->id,$_GET['lid'])['desc'],
+                    'description'   => $this->getLangItem($i->id,$lid)['desc'],
+                    's_price'       => $i->small_price,
+                    'm_price'       => $i->medium_price,
+                    'l_price'       => $i->large_price,
+                    'price'         => $price,
+                    'count'         => count($count),
+                    'nonveg'        => $i->nonveg,
+                    'addon'         => $this->addon($i->id),
+                    'status'        => $i->status,
+                    'showOptions'   => $showOptions,
+                    'cate_id'       => $i->category_id,
+                    'cate_name'     => isset($cate_name) ? $cate_name->name : "Sin asignar",
                 ];
 
 

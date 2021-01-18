@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers\api;
 
+use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Item;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
@@ -531,4 +533,21 @@ class ApiController extends Controller {
 
 		return response()->json(['data' => $order,'dboy' => $dboy]);
 	}
+
+    public function getProducts($category)
+    {
+        try {
+
+            $products = Item::where('category_id', $category)->get();
+            $category = Category::find($category);
+
+            if (!isset($products[0]))
+                return response()->json(['success' => false,'message' => 'No se han encontrado resultados para esta categoria']);
+
+            return response()->json(['data' => ['category' => ['id' => $category->id, 'name' => $category->name], 'products' => $products]]);
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => false,'message' => $e->getMessage()]);
+        }
+    }
 }

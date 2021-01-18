@@ -49,6 +49,7 @@ Route::get('makeStripePayment', 'ApiController@stripe');
 Route::get('getCards', 'ApiController@conektaCard');
 Route::get('removeCard/{id}', 'ApiController@removeCard');
 Route::get('getStatus/{id}', 'ApiController@getStatus');
+Route::get('getProducts/{category}', 'ApiController@getProducts');
 
 include("dboy.php");
 include("store.php");
